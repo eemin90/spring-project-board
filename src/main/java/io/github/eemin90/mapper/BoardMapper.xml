@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.eemin90.mapper.BoardMapper">
+
+	<!-- 다른 SQL문에서 <include refid="criteria"></include>로 해당 동적 SQL 이용가능 -->
+	<sql id="criteria">
+		<where>
+			<foreach item="type" separator="OR" collection="typeArr">
+				<choose>
+					<when test='type == "T"'>
+						b.title LIKE CONCAT('%', #{keyword}, '%') 
+					</when>
+					<when test='type == "W"'>
+						b.writer LIKE CONCAT('%', #{keyword}, '%') 
+					</when>
+					<when test='type == "C"'>
+						b.content LIKE CONCAT('%', #{keyword}, '%') 
+					</when>
+				</choose>
+			</foreach>
+		</where>
+	</sql>
+
+	<select id="getList" resultType="io.github.eemin90.domain.BoardVO">
+	<![CDATA[
+	
+		SELECT
+			bno bno,
+			title title,
+			content content,
+			writer writer,
+			regdate regdate,
+			updatedate updatedate
+			
+		FROM tbl_board
+		
+		WHERE bno > 0 ORDER BY bno DESC
+		
+	]]>
+	</select>
+	
+	<select id="getListWithPaging" resultType="io.github.eemin90.domain.BoardVO">
+	
+		SELECT
+			b.bno bno,
+			b.title title,
+			b.content content,
+			b.writer writer,
+			b.regdate regdate,
+			b.updatedate updateDate,
+			count(r.rno) replyCnt
+			
+		FROM tbl_board b LEFT JOIN tbl_reply r ON b.bno = r.bno
+		
+		<include refid="criteria"></include>
+	
+		GROUP BY b.bno
+		
+		ORDER BY b.bno DESC
+		
+		LIMIT #{from}, #{amount}
+		
+	</select>
+	<!-- 위의 #{from}은 Criteria의 getFrom() 메서드(SQL문 완성에 필요한 *(곱하기)가 사용 불가한 관계로 미리 수식을 작성하여 대입) -->
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*) FROM tbl_board b
+		<include refid="criteria"></include>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbl_board (title, content, writer)
+		VALUES (#{title}, #{content}, #{writer})
+	</insert>
+	
+	<insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="bno" keyColumn="bno">
+		INSERT INTO tbl_board (title, content, writer)
+		VALUES (#{title}, #{content}, #{writer})
+	</insert>
+	
+	<select id="read" resultType="io.github.eemin90.domain.BoardVO">
+		SELECT
+			bno bno,
+			title title,
+			content content,
+			writer writer,
+			regdate regdate,
+			updatedate updateDate
+			
+		FROM tbl_board
+		
+		WHERE bno = #{bno}
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM tbl_board WHERE bno = #{bno}
+	</delete>
+	
+	<update id="update">
+		UPDATE tbl_board
+		
+		SET
+			title = #{title},
+			content = #{content},
+			writer = #{writer},
+			updateDate = NOW()
+			
+		WHERE
+			bno = #{bno}
+	</update>
+</mapper>

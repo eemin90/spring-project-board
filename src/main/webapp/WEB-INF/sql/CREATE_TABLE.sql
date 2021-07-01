@@ -1,0 +1,24 @@
+CREATE DATABASE spr1;
+USE spr1;
+ALTER DATABASE spr1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+
+CREATE TABLE tbl_board (
+	bno INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    content VARCHAR(2000) NOT NULL,
+    writer VARCHAR(50) NOT NULL,
+    regdate TIMESTAMP DEFAULT NOW(),
+    updatedate TIMESTAMP DEFAULT NOW()
+);
+
+
+CREATE TABLE tbl_reply (
+	rno INT PRIMARY KEY AUTO_INCREMENT,
+    bno INT NOT NULL,
+    reply VARCHAR(512) NOT NULL,
+    replyer VARCHAR(50) NOT NULL,
+    replyDate TIMESTAMP DEFAULT NOW(),
+    updateDate TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (bno) REFERENCES tbl_board(bno)
+);
