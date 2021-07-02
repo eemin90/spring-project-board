@@ -3,10 +3,12 @@ package io.github.eemin90.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import io.github.eemin90.domain.BoardVO;
 import io.github.eemin90.domain.Criteria;
 import io.github.eemin90.mapper.BoardMapper;
-
+import io.github.eemin90.mapper.ReplyMapper;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -14,6 +16,7 @@ import lombok.AllArgsConstructor;
 public class BoardServiceImpl implements BoardService {
 
 	private BoardMapper mapper;
+	private ReplyMapper replyMapper;
 	
 //	@Autowired
 //	public BoardServiceImpl(BoardMapper mapper) {
@@ -36,8 +39,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public boolean remove(Long bno) {
-		return mapper.delete(bno) == 1;
+		// 댓글 삭제
+		replyMapper.deleteByBno(bno);
+
+		// 게시물 삭제
+		int cnt = mapper.delete(bno);
+
+		return cnt == 1;
 	}
 
 	@Override
