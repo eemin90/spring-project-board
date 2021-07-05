@@ -22,3 +22,11 @@ CREATE TABLE tbl_reply (
     updateDate TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (bno) REFERENCES tbl_board(bno)
 );
+
+
+CREATE TABLE tbl_board_file (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    bno INT NOT NULL,
+    fileName VARCHAR(200) NOT NULL,
+    FOREIGN KEY (bno) REFERENCES tbl_board(bno)
+);

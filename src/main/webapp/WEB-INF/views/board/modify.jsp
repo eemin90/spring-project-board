@@ -31,7 +31,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-12">
-			<form id="modify-form1" action="${appRoot}/board/modify" method="post">
+			<form id="modify-form1" action="${appRoot}/board/modify" method="post" enctype="multipart/form-data">
 				<input name="bno" value="${board.bno}" hidden>
 				<div class="form-group">
 					<label for="input1">제목</label>
@@ -40,6 +40,15 @@
 				<div class="form-group">
 					<label for="textarea1">내용</label>
 					<textarea id="textarea1" class="form-control" name="content" rows="5"><c:out value="${board.content}"/></textarea>
+				</div>
+				<c:if test="${not empty board.fileName}">
+					<div class="form-group">
+						<img class="img-fluid" src="${imgRoot}${board.bno}/${board.fileName}" />
+					</div>
+				</c:if>
+				<div class="form-group">
+					<label for="input3">파일</label>
+					<input type="file" id="input3" class="form-control" name="file" accept="image/*" />
 				</div>
 				<div class="form-group">
 					<label for="input2">작성자</label>

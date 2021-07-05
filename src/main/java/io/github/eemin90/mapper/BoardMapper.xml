@@ -82,16 +82,17 @@
 	
 	<select id="read" resultType="io.github.eemin90.domain.BoardVO">
 		SELECT
-			bno bno,
-			title title,
-			content content,
-			writer writer,
-			regdate regdate,
-			updatedate updateDate
+			b.bno bno,
+			b.title title,
+			b.content content,
+			b.writer writer,
+			b.regdate regdate,
+			b.updatedate updateDate,
+			f.fileName fileName
 			
-		FROM tbl_board
+		FROM tbl_board b LEFT JOIN tbl_board_file f ON b.bno = f.bno
 		
-		WHERE bno = #{bno}
+		WHERE b.bno = #{bno}
 	</select>
 	
 	<delete id="delete">

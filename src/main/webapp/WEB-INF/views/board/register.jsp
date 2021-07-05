@@ -18,7 +18,7 @@
 	<hr>
 	<div class="row">
 		<div class="col-12">
-			<form action="${appRoot}/board/register" method="post">
+			<form action="${appRoot}/board/register" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="input1">제목</label>
 					<input id="input1" class="form-control" name="title">
@@ -26,6 +26,10 @@
 				<div class="form-group">
 					<label for="textarea1">내용</label>
 					<textarea id="textarea1" class="form-control" name="content" rows="5"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="input3">파일</label>
+					<input id="input3" class="form-control" type="file" name="file" accept="image/*"></input>
 				</div>
 				<div class="form-group">
 					<label for="input2">작성자</label>

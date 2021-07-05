@@ -35,6 +35,11 @@ var boardBno = "${board.bno}";
 					<label for="textarea1">내용</label>
 					<textarea id="textarea1" class="form-control" name="content" rows="5" readonly><c:out value="${board.content}" /></textarea>
 				</div>
+				<c:if test="${not empty board.fileName}">
+					<div class="form-group">
+						<img class="img-fluid" src="${imgRoot}${board.bno}/${board.fileName}" />
+					</div>
+				</c:if>
 				<div class="form-group">
 					<label for="input2">작성자</label>
 					<input id="input2" class="form-control" name="writer" value="${board.writer}" readonly>
