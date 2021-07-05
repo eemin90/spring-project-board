@@ -134,6 +134,17 @@ public class BoardServiceImpl implements BoardService {
 
 		return cnt == 1;
 	}
+	
+	@Override
+	@Transactional
+	public void fremove(BoardVO board, MultipartFile file) {
+		// 파일 삭제(AWS)
+		BoardVO vo = mapper.read(board.getBno());
+		removeFile(vo);
+		
+		// 파일 삭제(DB)
+		fileMapper.deleteByBno(board.getBno());
+	}
 
 	private void removeFile(BoardVO vo) {
 		String key = vo.getBno() + "/" + vo.getFileName();

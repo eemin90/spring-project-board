@@ -94,6 +94,25 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+	@PostMapping("/fremove")
+	public String fremove(BoardVO board, Criteria cri, @RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
+		// request parameter 수집
+		
+		// service 일 시킴
+		service.fremove(board, file);
+		
+		// 결과 담고
+		rttr.addFlashAttribute("fremove", board);
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
+		// forward or redirect
+		return "redirect:/board/list";
+	}
+	
 	@PostMapping("/remove")
 	public String remove(Long bno, Criteria cri, RedirectAttributes rttr) {
 		// request parameter 수집

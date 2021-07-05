@@ -20,6 +20,14 @@
 				$('#modify-form1').submit();
 			}
 		});
+		
+		$("#file-remove-btn1").click(function() {
+			var remove = "${appRoot}/board/fremove";
+			if (confirm("파일을 삭제하시겠습니까?")) {
+				$("#modify-form1").attr("action", remove);
+				$("#modify-form1").submit();
+			}
+		});
 	});
 </script>
 
@@ -32,10 +40,10 @@
 	<div class="row">
 		<div class="col-12">
 			<form id="modify-form1" action="${appRoot}/board/modify" method="post" enctype="multipart/form-data">
-				<input name="bno" value="${board.bno}" hidden>
+				<input name="bno" value="${board.bno}" hidden />
 				<div class="form-group">
 					<label for="input1">제목</label>
-					<input id="input1" class="form-control" name="title" value="${board.title}">
+					<input id="input1" class="form-control" name="title" value="${board.title}" />
 				</div>
 				<div class="form-group">
 					<label for="textarea1">내용</label>
@@ -44,6 +52,7 @@
 				<c:if test="${not empty board.fileName}">
 					<div class="form-group">
 						<img class="img-fluid" src="${imgRoot}${board.bno}/${board.fileName}" />
+						<input id="file-remove-btn1" class="btn btn-outline-danger" type="button" value="파일 삭제" />
 					</div>
 				</c:if>
 				<div class="form-group">
@@ -52,7 +61,7 @@
 				</div>
 				<div class="form-group">
 					<label for="input2">작성자</label>
-					<input id="input2" class="form-control" name="writer" value="${board.writer}" readonly>
+					<input id="input2" class="form-control" name="writer" value="${board.writer}" readonly />
 				</div>
 				
 				<!-- controller의 modify로 post 방식으로 이동할 때 값을 전달 -->
@@ -62,8 +71,8 @@
 				<input name="keyword" value="${cri.keyword}" hidden />
 				
 				<hr>
-				<input class="btn btn-secondary" type="submit" value="수정">
-				<input id="board-remove-btn1" class="btn btn-danger" type="button" value="삭제">
+				<input class="btn btn-secondary" type="submit" value="수정" />
+				<input id="board-remove-btn1" class="btn btn-danger" type="button" value="삭제" />
 			</form>
 		</div>
 	</div>

@@ -192,6 +192,24 @@
 			</div>
 		</div>
 	</c:when>
+	<c:when test="${not empty fremove}">
+		<div class="modal fade" id="modal1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal1Label">알림</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">${fremove.bno}번 글의 첨부 파일이 삭제되었습니다.</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:when>
 </c:choose>
 
 </body>
