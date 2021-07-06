@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.eemin90.mapper.MemberMapper">
+	
+	<insert id="insert">
+		INSERT INTO tbl_member
+		(userid, userpw, username)
+		VALUES
+		(#{userid}, #{userpw}, #{username})
+	</insert>
+	
+	<insert id="insertAuth">
+		INSERT INTO tbl_member_auth
+		(userid, auth)
+		VALUES
+		(#{userid}, #{auth})
+	</insert>
+	
+	<select id="read" resultMap="memberMap">
+		SELECT
+			m.userid userid,
+			m.userpw userpw,
+			m.username username,
+			m.enabled enabled,
+			m.regdate regdate,
+			m.updateDate updateDate,
+			a.auth auth
+		
+		FROM
+			tbl_member m LEFT JOIN tbl_member_auth a ON m.userid = a.userid
+		
+		WHERE
+			m.userid = #{userid}
+	</select>
+	
+	<resultMap type="io.github.eemin90.domain.MemberVO" id="memberMap">
+		<id property="userid" column="userid" /> <!-- property는 위 type의 항목, column은 SQL의 항목 -->
+		<id property="userpw" column="userpw" />
+		<id property="userName" column="username" />
+		<id property="enabled" column="enabled" />
+		<id property="regdate" column="regdate" />
+		<id property="updateDate" column="updateDate" />
+		<collection property="authList" resultMap="authMap" />
+	</resultMap>
+	<resultMap type="io.github.eemin90.domain.AuthVO" id="authMap">
+		<result property="userid" column="userid" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+</mapper>
