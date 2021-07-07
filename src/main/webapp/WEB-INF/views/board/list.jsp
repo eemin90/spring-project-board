@@ -92,11 +92,11 @@
 
 					<!-- 작성자의 길이가 10 이상이면 10자 까지만 출력하고 뒤에 '...'을 붙인다 -->
 					<c:choose>
-						<c:when test="${fn:length(board.writer) >= 10}">
-							<td>${fn:substring(board.writer, 0, 10)}...</td>
+						<c:when test="${fn:length(board.writerName) >= 10}">
+							<td>${fn:substring(board.writerName, 0, 10)}...</td>
 						</c:when>
-						<c:when test="${fn:length(board.writer) < 10}">
-							<td>${board.writer}</td>
+						<c:when test="${fn:length(board.writerName) < 10}">
+							<td>${board.writerName}</td>
 						</c:when>
 					</c:choose>
 					

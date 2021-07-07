@@ -52,6 +52,8 @@
 				<c:if test="${not empty board.fileName}">
 					<div class="form-group">
 						<img class="img-fluid" src="${imgRoot}${board.bno}/${board.fileName}" />
+					</div>
+					<div class="form-group">
 						<input id="file-remove-btn1" class="btn btn-outline-danger" type="button" value="파일 삭제" />
 					</div>
 				</c:if>
@@ -61,7 +63,8 @@
 				</div>
 				<div class="form-group">
 					<label for="input2">작성자</label>
-					<input id="input2" class="form-control" name="writer" value="${board.writer}" readonly />
+					<input id="input2" class="form-control" name="writer" value="${board.writer}" hidden readonly />
+					<input class="form-control" value="${board.writerName}" readonly />
 				</div>
 				
 				<!-- controller의 modify로 post 방식으로 이동할 때 값을 전달 -->

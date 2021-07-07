@@ -14,9 +14,10 @@
 		<security:intercept-url pattern="/secure/member" access="hasRole('ROLE_MEMBER')" />
 		<security:intercept-url pattern="/secure/admin" access="hasRole('ROLE_ADMIN')" />
 		<!-- <security:form-login /> --> <!-- 권한이 없는 경우 security의 login form으로 redirect됨 -->
-		<security:form-login login-page="/member/login" />
+		<security:form-login login-page="/member/login" default-target-url="/board/list" />
 		<security:logout />
 		<security:csrf disabled="true" /> <!-- disabled="true"는 권장되는 값이 아님 -->
+		<security:remember-me data-source-ref="dataSource" /> <!-- root-context.xml의 HikariCP Bean ID 값 -->
 	</security:http>
 	
 	<security:authentication-manager>

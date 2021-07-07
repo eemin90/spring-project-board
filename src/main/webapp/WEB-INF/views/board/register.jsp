@@ -21,19 +21,20 @@
 			<form action="${appRoot}/board/register" method="post" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="input1">제목</label>
-					<input id="input1" class="form-control" name="title" />
+					<input id="input1" name="title" class="form-control" />
 				</div>
 				<div class="form-group">
 					<label for="textarea1">내용</label>
-					<textarea id="textarea1" class="form-control" name="content" rows="5"></textarea>
+					<textarea id="textarea1" name="content" class="form-control" rows="5"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="input3">파일</label>
-					<input id="input3" class="form-control" type="file" name="file" accept="image/*" />
+					<input type="file" id="input3" name="file" class="form-control" accept="image/*" />
 				</div>
 				<div class="form-group">
 					<label for="input2">작성자</label>
-					<input id="input2" class="form-control" name="writer" />
+					<input id="input2" name="writer" class="form-control" value="${pinfo.member.userid}" hidden readonly />
+					<input class="form-control" value="${pinfo.member.userName}" readonly />
 				</div>
 				<input class="btn btn-primary" type="submit" value="작성" />
 			</form>
