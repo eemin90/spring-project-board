@@ -2,6 +2,7 @@ package io.github.eemin90.mapper;
 
 import java.util.List;
 
+import io.github.eemin90.domain.MemberVO;
 import io.github.eemin90.domain.ReplyVO;
 
 public interface ReplyMapper {
@@ -21,5 +22,7 @@ public interface ReplyMapper {
 	//public int getCountByBno(Long bno);
 	
 	public int deleteByBno(Long bno);
+
+	public void removeByUserid(MemberVO vo);
 	
 }

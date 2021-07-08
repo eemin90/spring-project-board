@@ -8,10 +8,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import io.github.eemin90.domain.MemberVO;
 import lombok.Getter;
+import lombok.Setter;
 
 public class CustomUser extends User {
 
 	@Getter
+	@Setter
 	private MemberVO member;
 
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {

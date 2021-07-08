@@ -23,7 +23,8 @@ var userid = "${pinfo.member.userid}";
 <my:navbar />
 <div class="container">
 
-<div id="alert1" class="alert alert-primary fade" role="alert"></div>
+	<div id="alert1" class="alert alert-primary fade" role="alert"></div>
+
 	<h1>글 보기</h1>
 	<hr>
 	<div class="row">
@@ -97,7 +98,8 @@ var userid = "${pinfo.member.userid}";
 						<input type="text" value="${board.bno}" id="reply-bno-input1" readonly hidden />
 						<div class="form-group">
 							<label for="reply-replyer-input1" class="col-form-label">작성자</label>
-							<input type="text" class="form-control" id="reply-replyer-input1" />
+							<input type="text" class="form-control" value="${pinfo.member.userName}" readonly />
+							<input type="text" class="form-control" id="reply-replyer-input1" value="${pinfo.member.userid}" hidden />
 						</div>
 						<div class="form-group">
 							<label for="reply-reply-textarea1" class="col-form-label">댓글</label>
@@ -130,7 +132,8 @@ var userid = "${pinfo.member.userid}";
 					<input type="text" value="${board.bno}" id="reply-bno-input2" readonly hidden />
 					<div class="form-group">
 						<label for="reply-replyer-input1" class="col-form-label">작성자</label>
-						<input type="text" class="form-control" id="reply-replyer-input2" readonly />
+						<input type="text" class="form-control" id="reply-replyerName-input2" readonly />
+						<input type="text" class="form-control" id="reply-replyer-input2" hidden />
 					</div>
 					<div class="form-group">
 						<label for="reply-reply-textarea1" class="col-form-label">댓글</label>

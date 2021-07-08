@@ -25,6 +25,28 @@
 	<c:param name="type" value="${cri.type}" />
 </c:url>
 
+<c:url value="/member/signup" var="signUpUrl">
+	<c:if test="${not empty cri.pageNum}">
+		<c:param name="pageNum" value="${cri.pageNum}" />
+	</c:if>
+	<c:if test="${not empty cri.amount}">
+		<c:param name="amount" value="${cri.amount}" />
+	</c:if>
+	<c:param name="keyword" value="${cri.keyword}" />
+	<c:param name="type" value="${cri.type}" />
+</c:url>
+
+<c:url value="/member/info" var="memberInfoUrl">
+	<c:if test="${not empty cri.pageNum}">
+		<c:param name="pageNum" value="${cri.pageNum}" />
+	</c:if>
+	<c:if test="${not empty cri.amount}">
+		<c:param name="amount" value="${cri.amount}" />
+	</c:if>
+	<c:param name="keyword" value="${cri.keyword}" />
+	<c:param name="type" value="${cri.type}" />
+</c:url>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" href="${appRoot}/board/list">스프링 게시판</a>
 	<button class="navbar-toggler offset-md-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +62,8 @@
 					<a class="nav-link" href="${registerUrl}"><i class="fas fa-pencil-alt"></i> 글쓰기</a>
 				</li>
 			</sec:authorize>
+			
+			<%-- security 연습용
 			<li class="nav-item">
 				<a class="nav-link" href="${appRoot}/secure/all">모두</a>
 			</li>
@@ -49,9 +73,25 @@
 			<li class="nav-item">
 				<a class="nav-link" href="${appRoot}/secure/admin">어드민만</a>
 			</li>
+			 --%>
+			
+			<sec:authorize access="!isAuthenticated()">
+				<li class="nav-item">
+					<a class="nav-link" href="${signUpUrl}">회원 가입</a>
+				</li>
+			</sec:authorize>
+			
+			<sec:authorize access="isAuthenticated()">
+				<li class="nav-item">
+					<a class="nav-link" href="${memberInfoUrl}">회원 정보</a>
+				</li>
+			</sec:authorize>
 		</ul>
 	</div>
 	
+	<sec:authorize access="!isAuthenticated()">
+			<a href="${appRoot}/member/login" class="btn btn-outline-primary">로그인</a>
+	</sec:authorize>
 	<sec:authorize access="isAuthenticated()">
 		<form action="${appRoot}/logout" method="post">
 			<input type="submit" class="btn btn-outline-secondary" value="로그아웃" />

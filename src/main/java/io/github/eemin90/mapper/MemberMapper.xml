@@ -4,6 +4,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.github.eemin90.mapper.MemberMapper">
 	
+	<delete id="removeAuth">
+		DELETE FROM tbl_member_auth
+		WHERE userid = #{userid}
+	</delete>
+	
+	<delete id="remove">
+		DELETE FROM tbl_member
+		WHERE userid = #{userid}
+	</delete>
+	
+	<update id="update">
+		UPDATE tbl_member
+		
+		SET userpw = #{userpw},
+			userName = #{userName},
+			updateDate = now()
+		
+		WHERE
+			userid = #{userid}
+	</update>
+	
 	<insert id="insert">
 		INSERT INTO tbl_member
 		(userid, userpw, username)
@@ -37,11 +58,11 @@
 	
 	<resultMap type="io.github.eemin90.domain.MemberVO" id="memberMap">
 		<id property="userid" column="userid" /> <!-- property는 위 type의 항목, column은 SQL의 항목 -->
-		<id property="userpw" column="userpw" />
-		<id property="userName" column="username" />
-		<id property="enabled" column="enabled" />
-		<id property="regdate" column="regdate" />
-		<id property="updateDate" column="updateDate" />
+		<result property="userpw" column="userpw" />
+		<result property="userName" column="username" />
+		<result property="regdate" column="regdate" />
+		<result property="updateDate" column="updateDate" />
+		<result property="enabled" column="enabled" />
 		<collection property="authList" resultMap="authMap" />
 	</resultMap>
 	<resultMap type="io.github.eemin90.domain.AuthVO" id="authMap">

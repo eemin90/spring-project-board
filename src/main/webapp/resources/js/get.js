@@ -9,6 +9,7 @@ $(function() {
 			success: function(reply) {
 				$("#reply-rno-input2").val(reply.rno);
 				$("#reply-replyer-input2").val(reply.replyer);
+				$("#reply-replyerName-input2").val(reply.replyerName);
 				$("#reply-reply-textarea2").text(reply.reply);
 				
 				// 댓글 작성자와 로그인 유저가 같지 않으면 수정/삭제 버튼 제거
@@ -43,7 +44,7 @@ $(function() {
 				<li class="media" id="reply${reply.rno}" data-rno="${reply.rno}">
 					<div class="media-body">
 						<div class="d-flex justify-content-between">
-							<strong class="flex-grow-1 bd-highlight">${reply.replyer}</strong>
+							<strong class="flex-grow-1 bd-highlight">${reply.replyerName}</strong>
 							<small class="bd-highlight text-muted">${new Date(reply.replyDate).toISOString().split("T")[0]}</small><br>
 						</div>
 						<small>${reply.reply}</small><hr>

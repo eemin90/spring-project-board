@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.github.eemin90.domain.BoardVO;
 import io.github.eemin90.domain.Criteria;
+import io.github.eemin90.domain.MemberVO;
 
 public interface BoardMapper {
 	
@@ -36,4 +37,6 @@ public interface BoardMapper {
 	public int update(BoardVO board);
 
 	public int getTotalCount(Criteria cri);
+
+	public void removeByUserid(MemberVO vo);
 }
