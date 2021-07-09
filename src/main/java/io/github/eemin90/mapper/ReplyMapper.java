@@ -24,5 +24,7 @@ public interface ReplyMapper {
 	public int deleteByBno(Long bno);
 
 	public void removeByUserid(MemberVO vo);
+
+	public void removeByBnoByUserid(MemberVO vo);
 	
 }

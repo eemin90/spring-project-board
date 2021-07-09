@@ -12,4 +12,8 @@ public interface MemberService {
 
 	boolean remove(MemberVO vo);
 
+	boolean remove(MemberVO vo, String oldPassword);
+
+	boolean modify(MemberVO vo, String oldPassword);
+
 }
