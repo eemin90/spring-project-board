@@ -21,7 +21,7 @@ var userid = "${pinfo.member.userid}";
 </head>
 <body>
 <my:navbar />
-<div class="container mt-5">
+<div class="container mt-1">
 
 	<div id="alert1" class="alert alert-primary fade" role="alert"></div>
 

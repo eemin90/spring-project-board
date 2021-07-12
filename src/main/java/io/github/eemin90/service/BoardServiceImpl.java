@@ -1,6 +1,8 @@
 package io.github.eemin90.service;
 
+import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,10 @@ import io.github.eemin90.domain.FileVO;
 import io.github.eemin90.mapper.BoardMapper;
 import io.github.eemin90.mapper.FileMapper;
 import io.github.eemin90.mapper.ReplyMapper;
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.profiles.ProfileFile;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
@@ -34,8 +36,23 @@ public class BoardServiceImpl implements BoardService {
 	public BoardServiceImpl() {
 		this.bucketName = "choongang-eemin90";
 		this.profileName = "spring1";
+		/*  
+		 * create
+		 *  /home/tomcat/.aws/credentials
+		 */
+		
+		Path contentLocation = new File(System.getProperty("user.home") + "/.aws/credentials").toPath();
+		ProfileFile pf = ProfileFile.builder()
+				.content(contentLocation)
+				.type(ProfileFile.Type.CREDENTIALS)
+				.build();
+		ProfileCredentialsProvider pcp = ProfileCredentialsProvider.builder()
+				.profileFile(pf)
+				.profileName(profileName)
+				.build();
+		
 		this.s3 = S3Client.builder()
-				.credentialsProvider(ProfileCredentialsProvider.create(profileName))
+				.credentialsProvider(pcp)
 				.build();
 	}
 
